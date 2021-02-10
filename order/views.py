@@ -187,7 +187,7 @@ def ajax_modify_order_item(request, pk, action):
 def ajax_search_products(request, pk):
     instance = get_object_or_404(Order, id=pk)
     q = request.GET.get('q', None)
-    products = Product.broswer.active().filter(title__startswith=q) if q else Product.broswer.active()
+    products = Product.broswer.active().filter(title__icontains=q) if q else Product.broswer.active()
     products = products[:12]
     products = ProductTable(products)
     RequestConfig(request).configure(products)
